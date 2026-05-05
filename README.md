@@ -97,8 +97,7 @@ All outputs are stored under:
 
 Due to the large size of the experiment outputs (over 3 GB), results are not stored directly in this repository.
 
-You may download the precomputed results here:
-[DOWNLOAD RESULTS HERE](https://drive.google.com/file/d/1iGX_sMs-aOa8uc9sa0RnXUhmNoIPWidK/view?usp=sharing)
+You may download the precomputed results [here](https://drive.google.com/file/d/1iGX_sMs-aOa8uc9sa0RnXUhmNoIPWidK/view?usp=sharing).
 
 ### Setup
 
