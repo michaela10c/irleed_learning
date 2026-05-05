@@ -262,6 +262,8 @@ Cause:
 
 ## Results Summary
 
+All results are aggregated over multiple random seeds.
+
 ### Beta
 
 - converges to approximately 0.9 (epsilon OFF) or ~1.35 (epsilon ON)
