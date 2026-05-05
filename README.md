@@ -69,13 +69,13 @@ All outputs are stored under:
 
 `results/gridworld_simple/irleed/env_1/`
 
-Homogeneous:
+**Homogeneous**:
 - `demo_beta_0.100/noeps/baseline.p`
 - `demo_beta_1.000/noeps/baseline.p`
 - `demo_beta_5.000/noeps/baseline.p`
 - `demo_beta_10.000/noeps/baseline.p`
 
-Heterogeneous:
+**Heterogeneous**:
 - `demo_betas_0.300_1.000_5.000/noeps/baseline.p`
 
 ---
@@ -85,6 +85,40 @@ Heterogeneous:
 `results/gridworld_simple/irleed_eps_only/env_1/demo_betas_1.000_1.000_1.000/eps/lam_2.000.p`
 
 ---
+
+## Precomputed Results (Optional)
+
+Due to the large size of the experiment outputs (several GB), results are not stored directly in this repository.
+
+You may download the precomputed results here:
+[DOWNLOAD RESULTS HERE](https://drive.google.com/file/d/1iGX_sMs-aOa8uc9sa0RnXUhmNoIPWidK/view?usp=sharing)
+
+### Setup
+
+1. Download the zip file
+2. Extract it
+3. Place the extracted `results/` folder in the root of the repository
+
+The directory structure should look like:
+
+```
+project_root/
+├── run_mix.py
+├── src/
+├── results/
+│   └── gridworld_simple/
+│       ├── irleed/
+│       └── irleed_eps_only/
+```
+
+---
+
+### Note
+
+- These results correspond to the experiments described in the report (100 seeds, 1000 iterations).
+- Re-running all experiments from scratch may take several hours to multiple days depending on hardware.
+- The provided results are for convenience only; all results can be reproduced using the commands listed above.
+
 
 ## Experiments
 
