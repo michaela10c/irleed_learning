@@ -4,9 +4,9 @@
 
 This project studies scaling ambiguity in IRLEED (Inverse Reinforcement Learning by Estimating Expertise of Demonstrators).
 
-We investigate the following question:
+We investigate the following question: 
 
-Why does reward recovery succeed while expertise (beta) estimation fails?
+***Why does reward recovery succeed while expertise (beta) estimation fails?***
 
 We evaluate three experimental settings:
 1. Homogeneous setting (single demonstrator, epsilon OFF)
