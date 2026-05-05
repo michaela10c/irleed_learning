@@ -15,35 +15,44 @@ We evaluate three experimental settings:
 
 ## Codebase Structure
 
-The implementation builds on the original IRLEED codebase.
+The implementation builds on the original IRLEED codebase, with a root-level script for running experiments.
 
 ```
-src/
-├── irl_maxent/        (Maximum Entropy IRL baseline)
-│   ├── gridworld.py
-│   ├── maxent.py
-│   ├── optimizer.py
-│   ├── solver.py
-│   ├── trajectory.py
-│   └── plot.py
-│
-└── mix_irl/           (IRLEED + extensions)
-    ├── irl.py
-    ├── irleed.py
-    ├── helpers.py
-    └── trajectory.py
+irleed_learning/
+├── run_mix.py          (main experiment entry point)
+├── src/
+│   ├── irl_maxent/     (Maximum Entropy IRL baseline)
+│   │   ├── gridworld.py
+│   │   ├── maxent.py
+│   │   ├── optimizer.py
+│   │   ├── solver.py
+│   │   ├── trajectory.py
+│   │   └── plot.py
+│   │
+│   └── mix_irl/        (IRLEED + extensions)
+│       ├── irl.py
+│       ├── irleed.py
+│       ├── helpers.py
+│       └── trajectory.py
 ```
 
-Module roles:
+### Module roles:
+
+- `run_mix.py`  
+  Main script used to run all experiments.  
+  Handles:
+  - multi-seed execution
+  - experiment configuration
+  - saving results to `results/`
 
 - `irl_maxent/`  
-  Standard MaxEnt IRL implementation used as a baseline.
+  Standard Maximum Entropy IRL implementation used as a baseline.
 
 - `mix_irl/`  
   IRLEED implementation and extensions used in this project:
-  - mixture modeling across components
-  - beta (expertise) estimation
-  - epsilon-based reward perturbations
+  - mixture modeling across components  
+  - beta (expertise) estimation  
+  - epsilon-based reward perturbations  
   - multi-seed experiment pipeline
 
 ---
