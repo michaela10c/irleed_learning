@@ -65,105 +65,112 @@ All outputs are stored under:
 
 `results/gridworld_simple/`
 
-### 1. Standard IRLEED Experiments (ε OFF)
+### 1. Standard IRLEED Experiments (epsilon OFF)
 
 `results/gridworld_simple/irleed/env_1/`
 
-Contains:
-
 Homogeneous:
-`demo_beta_0.100/noeps/baseline.p`  
-`demo_beta_1.000/noeps/baseline.p`  
-`demo_beta_5.000/noeps/baseline.p`  
-`demo_beta_10.000/noeps/baseline.p`
+- `demo_beta_0.100/noeps/baseline.p`
+- `demo_beta_1.000/noeps/baseline.p`
+- `demo_beta_5.000/noeps/baseline.p`
+- `demo_beta_10.000/noeps/baseline.p`
 
 Heterogeneous:
-`demo_betas_0.300_1.000_5.000/noeps/baseline.p`
-
-These experiments explicitly disable epsilon (`noeps`) to study the baseline IRLEED behavior.
+- `demo_betas_0.300_1.000_5.000/noeps/baseline.p`
 
 ---
 
-### 2. Epsilon-Only Experiments (ε ON)
+### 2. Epsilon-Only Experiments (epsilon ON)
 
 `results/gridworld_simple/irleed_eps_only/env_1/demo_betas_1.000_1.000_1.000/eps/lam_2.000.p`
-
-This setting enables epsilon while fixing beta across components.
 
 ---
 
 ## Experiments
 
-### 1. Homogeneous Setting (ε OFF)
+---
+
+### 1. Homogeneous Setting (epsilon OFF)
 
 Setup:
-- `n_components = 1`
-- beta values = 0.1, 1.0, 5.0, 10.0
+- n_components = 1
+- beta ∈ {0.1, 1.0, 5.0, 10.0}
 - epsilon disabled
+- 100 seeds, 1000 steps
 
-Purpose:
-- Test identifiability with a single demonstrator
+#### Run commands:
+```
+python run_mix.py 
+-–save_dir gridworld_simple/irleed 
+-–n_components 1 
+-–demo_betas 0.1 
+-–max_steps 1000
+```
 
-Result:
-- beta is not recovered correctly
-- converges to similar values
+```
+python run_mix.py 
+-–save_dir gridworld_simple/irleed 
+–-n_components 1 
+–-demo_betas 1.0 
+–-max_steps 1000
+```
 
-Conclusion:
-Scaling ambiguity:
-(theta, beta) is equivalent to (c * theta, beta / c)
+```
+python run_mix.py 
+-–save_dir gridworld_simple/irleed 
+-–n_components 1 
+-–demo_betas 5.0 
+-–max_steps 1000
+```
+
+
+```
+python run_mix.py 
+-–save_dir gridworld_simple/irleed 
+-–n_components 1 
+-–demo_betas 10.0 
+-–max_steps 1000
+```
 
 ---
 
-### 2. Heterogeneous Setting (ε OFF)
+### 2. Heterogeneous Setting (epsilon OFF)
 
 Setup:
-- `n_components = 3`
-- beta values = 0.3, 1.0, 5.0
+- n_components = 3
+- beta = 0.3, 1.0, 5.0
 - epsilon disabled
+- 100 seeds, 1000 steps
 
-Purpose:
-- Test whether demonstrator heterogeneity resolves ambiguity
+#### Run command:
 
-Result:
-- reward recovery improves
-- policies collapse to similar behavior
-
-Conclusion:
-No distinct behavioral modes are recovered.  
-Scaling ambiguity persists even with heterogeneous data.
-
+```
+python run_mix.py 
+–-save_dir gridworld_simple/irleed 
+–-n_components 3 
+–-demo_betas 0.3 1.0 5.0 
+–-max_steps 1000
+```
 ---
 
-### 3. Epsilon-Only Setting (ε ON)
+### 3. Epsilon-Only Setting (epsilon ON)
 
 Setup:
-- `n_components = 3`
-- beta = 1.0 (shared across all components)
-- epsilon learned per component
+- n_components = 3
+- beta = 1.0, 1.0, 1.0 (shared)
+- epsilon enabled
 - lambda = 2.0
 - 100 seeds, 1000 steps
 
-Purpose:
-- Test whether epsilon alone can explain heterogeneity
-
----
-
-## How to Run
-
-Run epsilon-only experiment:
+#### Run command:
 
 ```
-python run_mix.py \
-  --save_dir gridworld_simple/irleed_eps_only \
-  --n_components 3 \
-  --demo_betas 1.0 1.0 1.0 \
-  --max_steps 1000
+python run_mix.py 
+-–save_dir gridworld_simple/irleed_eps_only 
+–-n_components 3 
+–-demo_betas 1.0 1.0 1.0 
+–-max_steps 1000
 ```
-
-To reproduce homogeneous or heterogeneous experiments:
-- change `n_components`
-- change `demo_betas`
-- keep epsilon disabled (default behavior)
 
 ---
 
@@ -182,19 +189,12 @@ Each `.p` file contains:
 
 - 100 seeds launched
 - 2 seeds failed due to numerical instability
+- final results use 98 valid seeds
 
 Cause:
 - overflow in weighting
 - invalid normalization
 - NaN probabilities during trajectory sampling
-
-Example error:
-ValueError: probabilities contain NaN
-
-Final results:
-98 valid seeds
-
-This does not affect qualitative conclusions.
 
 ---
 
@@ -202,20 +202,20 @@ This does not affect qualitative conclusions.
 
 ### Beta
 
-- converges to ~1.34 to 1.35
+- converges to approximately 0.9 (epsilon OFF) or ~1.35 (epsilon ON)
 - nearly identical across components
 
 Conclusion:
-beta is globally rescaled (scaling ambiguity)
+beta is not identifiable due to scaling ambiguity
 
 ---
 
 ### Theta
 
-- U-shaped error curve
+- exhibits U-shaped error curve
 
 Interpretation:
-scaling drift, not overfitting
+- early learning followed by scaling drift (not overfitting)
 
 ---
 
@@ -226,7 +226,7 @@ scaling drift, not overfitting
 - similar across components
 
 Conclusion:
-epsilon adjusts reward but does not create distinct behaviors
+epsilon does not induce behavioral separation
 
 ---
 
@@ -239,35 +239,36 @@ epsilon adjusts reward but does not create distinct behaviors
 ### Visitation
 
 - minor variation only
-- no clear behavioral decomposition
+- no distinct behavioral modes
 
 ---
 
 ## Final Conclusion
 
-- reward recovery works
-- expertise (beta) is not identifiable
+- reward recovery is strong
+- beta (expertise) is not identifiable
 - components collapse to shared behavior
 
 Scaling ambiguity persists:
-- without epsilon (baseline IRLEED)
-- with epsilon (epsilon-only setting)
+- in homogeneous setting
+- in heterogeneous setting
+- in epsilon-only setting
 
 ---
 
 ## Files
 
-run_mix.py          main experiment script  
-src/irl_maxent/     MaxEnt IRL  
-src/mix_irl/        IRLEED + extensions  
-results/            outputs  
+- `run_mix.py` — main experiment script  
+- `src/irl_maxent/` — MaxEnt IRL baseline  
+- `src/mix_irl/` — IRLEED + extensions  
+- `results/` — outputs  
 
 ---
 
 ## Notes
 
-- builds on the original IRLEED framework
-- homogeneous and heterogeneous experiments explicitly disable epsilon
-- epsilon-only experiment isolates epsilon as the only source of heterogeneity
-- multi-seed evaluation used for robustness
+- experiments follow the setup described in the report (100 seeds, 1000 iterations)    
+- homogeneous and heterogeneous experiments disable epsilon  
+- epsilon-only experiment isolates epsilon as the only source of heterogeneity  
+- no notebook is required to reproduce results  
 - some seeds may fail due to numerical instability
