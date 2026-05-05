@@ -19,6 +19,7 @@ We evaluate three experimental settings:
 
 The implementation builds on the original IRLEED codebase.
 
+```
 src/
 ├── irl_maxent/        (Maximum Entropy IRL baseline)
 │   ├── gridworld.py
@@ -33,6 +34,7 @@ src/
     ├── irleed.py
     ├── helpers.py
     └── trajectory.py
+```
 
 Module roles:
 
