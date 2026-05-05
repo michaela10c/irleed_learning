@@ -317,7 +317,9 @@ Scaling ambiguity persists:
 - `run_mix.py` — main experiment script  
 - `src/irl_maxent/` — MaxEnt IRL baseline  
 - `src/mix_irl/` — IRLEED + extensions  
-- `results/` — outputs  
+- `results/` — experiment outputs  
+- `analyze_homogeneous_demonstrators.ipynb` — analysis for homogeneous setting  
+- `analyze_heterogeneous_demonstrators.ipynb` — analysis for heterogeneous and epsilon-only settings  
 
 ---
 
