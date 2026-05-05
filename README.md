@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project studies scaling ambiguity in IRLEED (Inverse Reinforcement Learning by Estimating Expertise of Demonstrators).
+This project studies scaling ambiguity in [IRLEED (Inverse Reinforcement Learning by Estimating Expertise of Demonstrators)](https://arxiv.org/html/2402.01886v2).
 
 We investigate the following question: 
 
