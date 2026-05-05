@@ -277,5 +277,4 @@ Scaling ambiguity persists:
 - experiments follow the setup described in the report (100 seeds, 1000 iterations)    
 - homogeneous and heterogeneous experiments disable epsilon  
 - epsilon-only experiment isolates epsilon as the only source of heterogeneity  
-- no notebook is required to reproduce results  
 - some seeds may fail due to numerical instability
