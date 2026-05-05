@@ -328,7 +328,7 @@ Scaling ambiguity persists:
 - `results/` — experiment outputs  
 - `analyze_homogeneous_demonstrators.ipynb` — analysis for homogeneous setting  
 - `analyze_heterogeneous_demonstrators.ipynb` — analysis for heterogeneous and epsilon-only settings  
-- Additional files from the original IRLEED repository are included for completeness and reproducibility, although they are not directly used in the experiments presented in this project.
+- Additional files from the original IRLEED repository and intermediate/debug experiment outputs are retained for completeness. Only the result files described above are used in the analyses and conclusions presented in this project.
 
 ---
 
